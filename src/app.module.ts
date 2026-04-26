@@ -7,6 +7,7 @@ import { UsersModule } from './modules/users/users.module';
 import { RolesModule } from './modules/roles/roles.module';
 import { AdminsModule } from './modules/admins/admins.module';
 import { PropertiesModule } from './modules/properties/properties.module';
+import { ToursModule } from './modules/tours/tours.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
@@ -25,6 +26,7 @@ import { AppService } from './app.service';
     RolesModule,
     AdminsModule,
     PropertiesModule,
+    ToursModule,
   ],
   controllers: [AppController],
   providers: [AppService],

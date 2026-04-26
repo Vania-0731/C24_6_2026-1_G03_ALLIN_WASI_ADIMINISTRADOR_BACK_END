@@ -17,6 +17,8 @@ export class AdminUser {
   permissions?: {
     manageUsers: boolean;
     manageProperties: boolean;
+    viewDashboard: boolean;
+    viewMap: boolean;
   };
 
   @Column({ type: 'datetime', nullable: true })

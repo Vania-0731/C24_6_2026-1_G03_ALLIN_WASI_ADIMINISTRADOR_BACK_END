@@ -49,6 +49,12 @@ export class Property {
   @Column({ nullable: true })
   tour360Url?: string;
 
+  @Column({ type: 'decimal', precision: 10, scale: 8, nullable: true })
+  latitude?: number;
+
+  @Column({ type: 'decimal', precision: 11, scale: 8, nullable: true })
+  longitude?: number;
+
   @CreateDateColumn()
   createdAt!: Date;
 
