@@ -8,6 +8,10 @@ import { RolesModule } from './modules/roles/roles.module';
 import { AdminsModule } from './modules/admins/admins.module';
 import { PropertiesModule } from './modules/properties/properties.module';
 import { ToursModule } from './modules/tours/tours.module';
+import { SecurityReportsModule } from './modules/security-reports/security-reports.module';
+import { SettingsModule } from './modules/settings/settings.module';
+import { NotificationsModule } from './modules/notifications/notifications.module';
+import { VerificationRequestsModule } from './modules/verification-requests/verification-requests.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
@@ -27,6 +31,10 @@ import { AppService } from './app.service';
     AdminsModule,
     PropertiesModule,
     ToursModule,
+    SecurityReportsModule,
+    SettingsModule,
+    NotificationsModule,
+    VerificationRequestsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
