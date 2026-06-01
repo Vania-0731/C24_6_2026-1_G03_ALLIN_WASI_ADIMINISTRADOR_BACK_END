@@ -39,14 +39,22 @@ async function seed() {
     // Admin User
     const adminEmail = 'admin@allinwasi.com';
     let admin = await userRepository.findOne({ where: { email: adminEmail } });
+    const hashedPassword = await bcrypt.hash('admin123456', 10);
+    
     if (!admin) {
       admin = await userRepository.save(userRepository.create({
         fullName: 'Administrador Principal',
         email: adminEmail,
-        password: await bcrypt.hash('admin123456', 10),
+        password: hashedPassword,
         roleId: adminRole.id,
         isVerified: true,
       }));
+    } else {
+      // If the user exists (e.g. from OAuth) but has no password, update it
+      admin.password = hashedPassword;
+      admin.roleId = adminRole.id; // ensure they are admin
+      admin.isVerified = true;
+      await userRepository.save(admin);
     }
     
     let adminEntry = await adminRepository.findOne({ where: { userId: admin.id } });

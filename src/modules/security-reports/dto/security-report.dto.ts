@@ -1,5 +1,5 @@
 import { IsString, IsNotEmpty, IsOptional, IsEnum } from 'class-validator';
-import { SecuritySeverity, SecurityStatus } from '../entities/security-report.entity';
+import { ReportStatus } from '../entities/report.entity';
 
 export class CreateSecurityReportDto {
   @IsString()
@@ -14,17 +14,17 @@ export class CreateSecurityReportDto {
   @IsOptional()
   location?: string;
 
-  @IsEnum(SecuritySeverity)
+  @IsString()
   @IsOptional()
-  severity?: SecuritySeverity;
+  severity?: string;
 
   @IsString()
   @IsOptional()
   reportedById?: string;
 }
 
-export class UpdateSecurityReportStatusDto {
-  @IsEnum(SecurityStatus)
+export class UpdateReportStatusDto {
+  @IsEnum(ReportStatus)
   @IsNotEmpty()
-  status: SecurityStatus;
+  status: ReportStatus;
 }

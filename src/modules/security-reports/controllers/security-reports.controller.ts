@@ -2,8 +2,7 @@ import { Controller, Get, Param, Patch, Body, UseGuards, Post, Req } from '@nest
 import { SecurityReportsService } from '../services/security-reports.service';
 import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
 import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
-import { SecurityStatus } from '../entities/security-report.entity';
-import { CreateSecurityReportDto, UpdateSecurityReportStatusDto } from '../dto/security-report.dto';
+import { CreateSecurityReportDto, UpdateReportStatusDto } from '../dto/security-report.dto';
 
 @ApiTags('security-reports')
 @ApiBearerAuth()
@@ -19,16 +18,15 @@ export class SecurityReportsController {
   }
 
   @Post()
-  @ApiOperation({ summary: 'Crear un reporte de seguridad' })
+  @ApiOperation({ summary: 'Crear un reporte de seguridad (Alerta Global)' })
   create(@Body() createDto: CreateSecurityReportDto, @Req() req: any) {
-    // jwt.strategy.ts devuelve el sub del JWT como 'userId'
-    createDto.reportedById = req?.user?.userId;
+    createDto.reportedById = req?.user?.userId || req?.user?.sub;
     return this.securityReportsService.create(createDto);
   }
 
   @Patch(':id/status')
   @ApiOperation({ summary: 'Actualizar estado de reporte' })
-  updateStatus(@Param('id') id: string, @Body() updateStatusDto: UpdateSecurityReportStatusDto) {
+  updateStatus(@Param('id') id: string, @Body() updateStatusDto: UpdateReportStatusDto) {
     return this.securityReportsService.updateStatus(id, updateStatusDto.status);
   }
 }
